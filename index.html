@@ -165,64 +165,8 @@
   .nav-cta:hover { background: transparent; color: var(--amber); }
 
   /* Mobile menu */
-  .hamburger { display: none; }
-
-  /* ============= MENU MOBILE (Option B) ============= */
-  .nav-toggle {
-    display: none;
-    align-items: center;
-    justify-content: center;
-    background: transparent;
-    border: none;
-    padding: 6px;
-    cursor: pointer;
-    color: var(--navy);
-    z-index: 1001;
-    position: relative;
-  }
-  .nav-toggle-icon { width: 30px; height: 30px; }
-  .nav-toggle-icon line {
-    transition: all 0.3s var(--transition);
-    transform-origin: center;
-  }
-  .nav-toggle.open .nav-toggle-l1 { transform: translateY(5px) rotate(45deg); }
-  .nav-toggle.open .nav-toggle-l2 { opacity: 0; }
-  .nav-toggle.open .nav-toggle-l3 { transform: translateY(-5px) rotate(-45deg); }
-
-  .nav-mobile-menu {
-    display: none;
-    position: fixed;
-    top: 88px;
-    right: 5%;
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 16px 48px rgba(22, 42, 72, 0.25), 0 4px 12px rgba(22, 42, 72, 0.15);
-    padding: 8px 0;
-    min-width: 220px;
-    z-index: 9999;
-    overflow: hidden;
-    animation: navMobileSlide 0.22s var(--transition);
-  }
-  @keyframes navMobileSlide {
-    from { opacity: 0; transform: translateY(-12px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .nav-mobile-menu.open { display: block; }
-  .nav-mobile-menu a {
-    display: block;
-    padding: 14px 24px;
-    color: var(--navy);
-    text-decoration: none;
-    font-family: 'Inter', sans-serif;
-    font-weight: 600;
-    font-size: 1rem;
-    transition: background 0.15s, color 0.15s;
-  }
-  .nav-mobile-menu a:hover, .nav-mobile-menu a:active {
-    background: rgba(22, 42, 72, 0.05);
-    color: var(--amber);
-  }
-  .nav-mobile-menu a + a { border-top: 1px solid #f0f0f0; }
+  .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .hamburger span { width: 24px; height: 2px; background: var(--navy); transition: all 0.3s; }
 
   /* ============= HERO ============= */
   .hero {
@@ -842,8 +786,7 @@
 
   @media (max-width: 768px) {
     .nav-links { display: none; }
-    .nav-cta { display: none; }
-    .nav-toggle { display: inline-flex; }
+    .hamburger { display: flex; }
     .hero h1 { font-size: 2.6rem; }
     .hero-content { padding: 100px 5% 50px; }
     section { padding: 40px 5%; }
@@ -919,27 +862,14 @@
       <li><a href="#" onclick="showPage('secteurs'); return false;" id="nav-secteurs">Secteurs</a></li>
       <li><a href="#" onclick="showPage('ressources'); return false;" id="nav-ressources">Ressources</a></li>
       <li><a href="#" onclick="showPage('contact'); return false;" id="nav-contact">Contact</a></li>
+      <li><a href="faq.html" id="nav-faq">FAQ</a></li>
     </ul>
     <a href="#" class="nav-cta" onclick="showPage('contact'); return false;">Diagnostic gratuit</a>
-    <button class="nav-toggle" onclick="toggleMobile()" aria-label="Menu" type="button">
-      <svg class="nav-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-        <line class="nav-toggle-l1" x1="4" y1="7" x2="20" y2="7"/>
-        <line class="nav-toggle-l2" x1="4" y1="12" x2="20" y2="12"/>
-        <line class="nav-toggle-l3" x1="4" y1="17" x2="20" y2="17"/>
-      </svg>
-    </button>
+    <div class="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </div>
   </div>
 </nav>
-
-<!-- Menu mobile (HORS de <nav> pour échapper au stacking context du backdrop-filter) -->
-<div class="nav-mobile-menu" id="nav-mobile-menu" role="menu">
-  <a href="#" onclick="showPage('accueil'); return false;">Accueil</a>
-  <a href="#" onclick="showPage('offres'); return false;">Nos offres</a>
-  <a href="#" onclick="showPage('apropos'); return false;">À propos</a>
-  <a href="#" onclick="showPage('secteurs'); return false;">Secteurs</a>
-  <a href="#" onclick="showPage('ressources'); return false;">Ressources</a>
-  <a href="#" onclick="showPage('contact'); return false;">Contact</a>
-</div>
 
 <!-- ==================== ACCUEIL ==================== -->
 <div id="page-accueil" class="page active">
@@ -968,11 +898,11 @@
       </div>
       <div class="hero-partners fade-up delay-4" style="justify-content: space-between; gap: 40px; padding: 18px 40px;">
         <a href="https://www.expertsgestion-gcl.fr" target="_blank" rel="noopener" style="display:flex;align-items:center;flex:1;justify-content:center;">
-          <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2025/01/Logosloganblanc.png" alt="GCL Experts Gestion" style="height: 80px;">
+          <img loading="lazy" src="images/gcl-blanc.png" alt="GCL Experts Gestion" style="height: 80px;">
         </a>
         <div class="sep"></div>
         <div style="flex:1;display:flex;align-items:center;justify-content:center;">
-          <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2024/08/Logo-label-remove-BG.png" alt="Label Le Figaro" style="height: 100px; border-radius: 4px;">
+          <img loading="lazy" src="images/label-figaro.png" onerror="this.onerror=null;this.src='https://expertsgestion-gcl.fr/wp-content/uploads/2024/08/Logo-label-remove-BG.png'" alt="Label Le Figaro" style="height: 100px; border-radius: 4px;">
         </div>
         <div class="sep"></div>
         <a href="https://www.expertsgestion-gcl.fr" target="_blank" rel="noopener" style="flex:1;display:flex;align-items:center;justify-content:center;text-decoration:none;">
@@ -999,21 +929,21 @@
   <section class="stats">
     <div class="stats-grid">
       <div class="stat-item fade-up">
-        <div class="stat-number"><span class="counter" data-target="8">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-number"><span class="counter" data-target="8">8</span><span class="stat-suffix">+</span></div>
         <div class="stat-label">années en conseil</div>
       </div>
       <div class="stat-item fade-up delay-1">
-        <div class="stat-number"><span class="counter" data-target="120">0</span><span class="stat-suffix">+</span></div>
+        <div class="stat-number"><span class="counter" data-target="120">120</span><span class="stat-suffix">+</span></div>
         <div class="stat-label">dirigeants accompagnés</div>
         <div class="stat-sublabel">+ 1 200 stagiaires formés</div>
       </div>
       <div class="stat-item fade-up delay-2">
-        <div class="stat-number"><span class="stat-prefix">+</span><span class="counter" data-target="25">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-number"><span class="stat-prefix">+</span><span class="counter" data-target="25">25</span><span class="stat-suffix">%</span></div>
         <div class="stat-label">trésorerie</div>
         <div class="stat-sublabel">cas client, en 6 mois</div>
       </div>
       <div class="stat-item fade-up delay-3">
-        <div class="stat-number"><span class="counter" data-target="95">0</span><span class="stat-suffix">%</span></div>
+        <div class="stat-number"><span class="counter" data-target="95">95</span><span class="stat-suffix">%</span></div>
         <div class="stat-label">taux de satisfaction</div>
       </div>
     </div>
@@ -1027,21 +957,21 @@
         <h2 class="section-title fade-up delay-1">De la création à la cession,<br>on vous accompagne</h2>
       </div>
       <div class="pillars-grid">
-        <div class="pillar-card fade-up" onclick="showPage('offres'); return false;">
+        <div class="pillar-card fade-up" onclick="window.location.href='offres/creation-entreprise.html'" style="cursor:pointer;">
           <img loading="lazy" class="pillar-card-img" src="https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=600&q=80" alt="Création entreprise">
           <div class="pillar-num">01</div>
           <h3>Création d'entreprise</h3>
           <p>Business plan, financements, statut juridique. Votre projet démarre sur des bases solides.</p>
           <span class="pillar-link">En savoir plus →</span>
         </div>
-        <div class="pillar-card fade-up delay-1" onclick="showPage('offres'); return false;">
+        <div class="pillar-card fade-up delay-1" onclick="window.location.href='offres/pilotage-gestion-entreprise.html'" style="cursor:pointer;">
           <img loading="lazy" class="pillar-card-img" src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80" alt="Pilotage gestion">
           <div class="pillar-num">02</div>
           <h3>Gestion & Pilotage</h3>
           <p>Trésorerie, rentabilité, tableaux de bord. Vous décidez sur des chiffres, pas des intuitions.</p>
           <span class="pillar-link">En savoir plus →</span>
         </div>
-        <div class="pillar-card fade-up delay-2" onclick="showPage('offres'); return false;">
+        <div class="pillar-card fade-up delay-2" onclick="window.location.href='offres/performance-durable-qse-rse.html'" style="cursor:pointer;">
           <img loading="lazy" class="pillar-card-img" src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80" alt="Performance durable QSE RSE">
           <div class="pillar-num">03</div>
           <h3>Performance durable QSE/RSE</h3>
@@ -1050,14 +980,14 @@
         </div>
       </div>
       <div class="pillars-row2">
-        <div class="pillar-card fade-up delay-3" onclick="showPage('offres'); return false;">
+        <div class="pillar-card fade-up delay-3" onclick="window.location.href='offres/formation-qhse.html'" style="cursor:pointer;">
           <img loading="lazy" class="pillar-card-img" src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80" alt="Formation QHSE">
           <div class="pillar-num">04</div>
           <h3>Formation QHSE</h3>
           <p>ISO 9001, 14001, 22000, 45001/MASE, HACCP. En intra-entreprise ou via nos partenaires en Bretagne.</p>
           <span class="pillar-link">En savoir plus →</span>
         </div>
-        <div class="pillar-card fade-up delay-4" onclick="showPage('offres'); return false;">
+        <div class="pillar-card fade-up delay-4" onclick="window.location.href='offres/cession-transmission.html'" style="cursor:pointer;">
           <img loading="lazy" class="pillar-card-img" src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=600&q=80" alt="Cession transmission">
           <div class="pillar-num">05</div>
           <h3>Cession & Transmission</h3>
@@ -1144,6 +1074,7 @@
   <section class="cta-banner">
     <h2 class="fade-up">Prêt à reprendre le contrôle ?</h2>
     <p class="fade-up delay-1">Diagnostic gratuit · Première heure offerte · Aucun engagement</p>
+      <p style="margin-top:10px;"><a href="diagnostic.html" style="color:var(--amber-light);font-weight:600;text-decoration:underline;">Ou commencez par l'auto-diagnostic en ligne (3 min) →</a></p>
     <a href="https://calendly.com/amosnata/nouvelle-reunion" target="_blank" rel="noopener" class="btn-white fade-up delay-2" onclick="if(window.gtag) gtag('event','cta_click',{location:'home_cta_banner'})">
       Prendre rendez-vous
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1192,6 +1123,7 @@
               </ul>
               <div class="offer-result"><strong>Résultat :</strong> Votre entreprise démarre sur des fondations solides. Business plan validé, financement obtenu.</div>
               <p class="offer-format">Format : Accompagnement de 1 à 6 mois · Points d'avancement hebdomadaires</p>
+              <p style="margin-top:14px;"><a href="offres/creation-entreprise.html" style="color:var(--amber);font-weight:600;text-decoration:none;">Voir la page complète de cette offre →</a></p>
             </div>
           </div>
         </div>
@@ -1220,6 +1152,7 @@
               </ul>
               <div class="offer-result"><strong>Résultat :</strong> Vous savez exactement où vous en êtes. Chaque décision est éclairée.</div>
               <p class="offer-format">Format : Missions de 3 à 12 mois · Rendez-vous mensuels · Disponibilité entre les sessions</p>
+              <p style="margin-top:14px;"><a href="offres/pilotage-gestion-entreprise.html" style="color:var(--amber);font-weight:600;text-decoration:none;">Voir la page complète de cette offre →</a></p>
             </div>
           </div>
         </div>
@@ -1248,6 +1181,7 @@
               </ul>
               <div class="offer-result"><strong>Résultat :</strong> Vos certifications deviennent un argument commercial. Vos équipes comprennent le système.</div>
               <p class="offer-format">Format : Accompagnement projet de 6 à 18 mois · Points d'avancement réguliers</p>
+              <p style="margin-top:14px;"><a href="offres/performance-durable-qse-rse.html" style="color:var(--amber);font-weight:600;text-decoration:none;">Voir la page complète de cette offre →</a></p>
             </div>
           </div>
         </div>
@@ -1295,6 +1229,7 @@
           <div class="accordion-body">
             <div class="accordion-content">
               <p class="target" style="color: var(--amber); font-weight: 600; margin-bottom: 14px;">Pour transmettre ou vendre dans les meilleures conditions.</p>
+              <p style="margin-top:14px;"><a href="offres/formation-qhse.html" style="color:var(--amber);font-weight:600;text-decoration:none;">Voir la page complète de cette offre →</a></p>
               <ul>
                 <li>Diagnostic complet et valorisation de l'entreprise</li>
                 <li>Optimisation de la valeur avant cession : rentabilité, structure financière</li>
@@ -1305,6 +1240,7 @@
               </ul>
               <div class="offer-result"><strong>Résultat :</strong> Votre entreprise est valorisée à son juste prix. La transmission se fait sereinement.</div>
               <p class="offer-format">Format : Accompagnement de 6 à 24 mois · Plus on anticipe, meilleur est le résultat</p>
+              <p style="margin-top:14px;"><a href="offres/cession-transmission.html" style="color:var(--amber);font-weight:600;text-decoration:none;">Voir la page complète de cette offre →</a></p>
             </div>
           </div>
         </div>
@@ -1356,12 +1292,12 @@
       </div>
 
       <div class="gcl-block fade-up">
-        <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2025/01/Logo_slogan.png" alt="GCL Experts Gestion">
+        <img loading="lazy" src="images/gcl-couleur.png" onerror="this.onerror=null;this.src='https://expertsgestion-gcl.fr/wp-content/uploads/2025/01/Logo_slogan.png'" alt="GCL Experts Gestion">
         <div class="gcl-block-text">
           <strong>Membre du réseau GCL Experts Gestion</strong>
           <span>Réseau national de consultants indépendants. Outils, méthodes éprouvées et réseau de pairs, avec un interlocuteur unique et local.</span>
         </div>
-        <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2024/08/Logo-label-remove-BG.png" alt="Label Le Figaro" style="height: 160px; border-radius: 4px;">
+        <img loading="lazy" src="images/label-figaro.png" onerror="this.onerror=null;this.src='https://expertsgestion-gcl.fr/wp-content/uploads/2024/08/Logo-label-remove-BG.png'" alt="Label Le Figaro" style="height: 160px; border-radius: 4px;">
       </div>
     </div>
   </section>
@@ -1453,28 +1389,43 @@
     </div>
   </div>
 
-  <section class="resources">
+  
+  <section style="padding: 40px 0 0;">
+    <div class="container">
+      <a href="diagnostic.html" class="fade-up" style="display:block;background:var(--navy);color:#fff;border-radius:14px;padding:34px 38px;text-decoration:none;">
+        <span style="display:block;font-family:'Big Shoulders Display',sans-serif;font-size:1.7rem;font-weight:800;margin-bottom:6px;">🧭 Auto-diagnostic en ligne — 3 minutes</span>
+        <span style="opacity:.85;">20 questions pour évaluer la santé de votre pilotage. Score immédiat, priorités personnalisées, gratuit.</span>
+        <span style="display:inline-block;margin-top:14px;background:var(--amber);color:#fff;padding:10px 22px;border-radius:8px;font-weight:700;">Faire le test →</span>
+      </a>
+    </div>
+  </section>
+
+<section class="resources">
     <div class="container">
       <div class="resources-grid">
         <div class="resource-card fade-up">
           <h3>Pilotage financier</h3>
           <p class="hook">Les 5 indicateurs que tout dirigeant devrait suivre chaque mois</p>
           <p class="angle">Trésorerie, BFR, marge brute, point mort, délai de paiement, expliqués simplement.</p>
+          <a href="ressources/5-indicateurs-pilotage.html" style="display:inline-block;margin-top:12px;color:var(--amber);font-weight:600;text-decoration:none;">Lire l'article →</a>
         </div>
         <div class="resource-card fade-up delay-1">
           <h3>Certification ISO</h3>
           <p class="hook">ISO 9001, 14001, 22000 : par où commencer ?</p>
           <p class="angle">Guide pratique pour comprendre les référentiels et choisir la bonne certification pour votre entreprise.</p>
+          <a href="ressources/certification-iso-par-ou-commencer.html" style="display:inline-block;margin-top:12px;color:var(--amber);font-weight:600;text-decoration:none;">Lire l'article →</a>
         </div>
         <div class="resource-card fade-up delay-2">
           <h3>Trésorerie</h3>
           <p class="hook">Plan de trésorerie : l'outil que 80% des dirigeants n'ont pas</p>
           <p class="angle">Comment anticiper les trous de trésorerie avant qu'ils n'arrivent.</p>
+          <a href="ressources/plan-de-tresorerie.html" style="display:inline-block;margin-top:12px;color:var(--amber);font-weight:600;text-decoration:none;">Lire l'article →</a>
         </div>
         <div class="resource-card fade-up delay-3">
           <h3>RSE & Performance</h3>
           <p class="hook">La RSE est-elle rentable pour une TPE ?</p>
           <p class="angle">3 exemples concrets où la démarche RSE a généré du chiffre d'affaires.</p>
+          <a href="ressources/rse-rentable-tpe.html" style="display:inline-block;margin-top:12px;color:var(--amber);font-weight:600;text-decoration:none;">Lire l'article →</a>
         </div>
       </div>
 
@@ -1484,14 +1435,17 @@
           <div class="magnet">
             <h4>Checklist diagnostic</h4>
             <p>Les 20 questions à se poser pour évaluer la santé de votre entreprise en 15 minutes.</p>
+            <a href="outils/checklist-diagnostic.html" style="display:inline-block;margin-top:10px;color:var(--amber);font-weight:600;text-decoration:none;">Ouvrir la checklist →</a>
           </div>
           <div class="magnet">
             <h4>Modèle tableau de bord</h4>
             <p>Un tableau de bord Excel prêt à l'emploi avec les indicateurs clés pour piloter votre activité.</p>
+            <a href="outils/tableau-de-bord-pilotage.xlsx" style="display:inline-block;margin-top:10px;color:var(--amber);font-weight:600;text-decoration:none;">Télécharger le fichier Excel →</a>
           </div>
           <div class="magnet">
             <h4>Simulateur trésorerie</h4>
             <p>Projetez votre trésorerie sur 12 mois et anticipez les moments critiques.</p>
+            <a href="outils/simulateur-tresorerie.xlsx" style="display:inline-block;margin-top:10px;color:var(--amber);font-weight:600;text-decoration:none;">Télécharger le simulateur →</a>
           </div>
         </div>
       </div>
@@ -1543,7 +1497,7 @@
             </div>
             <div class="contact-item-text">
               <strong>Localisation</strong>
-              <span>Rennes, Bretagne · Interventions sur toute la région</span>
+              <span>Rennes, Bretagne · Interventions sur toute la région<br><span style="opacity:.8;">Rennes · Cotonou — Impact Conseil accompagne aussi les entreprises entre l'Europe et l'Afrique de l'Ouest</span></span>
             </div>
           </div>
 
@@ -1558,7 +1512,7 @@
           </div>
 
           <div class="gcl-block" style="margin-top: 30px;">
-            <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2025/01/Logo_slogan.png" alt="GCL" style="height: 105px;">
+            <img loading="lazy" src="images/gcl-couleur.png" onerror="this.onerror=null;this.src='https://expertsgestion-gcl.fr/wp-content/uploads/2025/01/Logo_slogan.png'" alt="GCL" style="height: 105px;">
             <div class="gcl-block-text">
               <strong>Réseau GCL Experts Gestion</strong>
               <span>N°1 du conseil en pilotage d'entreprise</span>
@@ -1633,17 +1587,17 @@
       </a>
       <p>Pilotage, gestion et performance durable pour les dirigeants de TPE/PME en Bretagne. Formation QHSE certifiante pour les équipes.</p>
       <div class="footer-logos">
-        <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2025/01/Logosloganblanc.png" alt="GCL" style="height: 90px;">
-        <img loading="lazy" src="https://expertsgestion-gcl.fr/wp-content/uploads/2024/08/Logo-label-remove-BG.png" alt="Label Le Figaro" style="height: 160px; border-radius: 4px;">
+        <img loading="lazy" src="images/gcl-blanc.png" alt="GCL" style="height: 90px;">
+        <img loading="lazy" src="images/label-figaro.png" onerror="this.onerror=null;this.src='https://expertsgestion-gcl.fr/wp-content/uploads/2024/08/Logo-label-remove-BG.png'" alt="Label Le Figaro" style="height: 160px; border-radius: 4px;">
       </div>
     </div>
     <div class="footer-col">
       <h4>Nos offres</h4>
-      <a href="#" onclick="showPage('offres'); return false;">Création d'entreprise</a>
-      <a href="#" onclick="showPage('offres'); return false;">Gestion & Pilotage</a>
-      <a href="#" onclick="showPage('offres'); return false;">QSE / RSE</a>
-      <a href="#" onclick="showPage('offres'); return false;">Formation QHSE</a>
-      <a href="#" onclick="showPage('offres'); return false;">Cession & Transmission</a>
+      <a href="offres/creation-entreprise.html">Création d'entreprise</a>
+      <a href="offres/pilotage-gestion-entreprise.html">Gestion & Pilotage</a>
+      <a href="offres/performance-durable-qse-rse.html">QSE / RSE</a>
+      <a href="offres/formation-qhse.html">Formation QHSE</a>
+      <a href="offres/cession-transmission.html">Cession & Transmission</a>
     </div>
     <div class="footer-col">
       <h4>Navigation</h4>
@@ -1651,7 +1605,7 @@
       <a href="#" onclick="showPage('apropos'); return false;">À propos</a>
       <a href="#" onclick="showPage('secteurs'); return false;">Secteurs</a>
       <a href="#" onclick="showPage('ressources'); return false;">Ressources</a>
-      <a href="#" onclick="showPage('contact'); return false;">Contact</a>
+      <a href="#" onclick="showPage('contact'); return false;">Contact</a> <a href="faq.html">FAQ</a> <a href="diagnostic.html">Auto-diagnostic</a>
     </div>
     <div class="footer-col">
       <h4>Contact</h4>
@@ -1696,12 +1650,6 @@ const VALID_PAGES = ['accueil', 'offres', 'apropos', 'secteurs', 'ressources', '
 // Page navigation (mise à jour de l'URL pour partage des liens directs)
 function showPage(page, updateHash = true) {
   if (!VALID_PAGES.includes(page)) page = 'accueil';
-  // Fermer le menu mobile si ouvert
-  const mobileMenu = document.getElementById('nav-mobile-menu');
-  if (mobileMenu && mobileMenu.classList.contains('open')) {
-    mobileMenu.classList.remove('open');
-    document.querySelector('.nav-toggle')?.classList.remove('open');
-  }
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
   document.getElementById('page-' + page).classList.add('active');
   document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
@@ -1801,26 +1749,11 @@ function toggleAccordion(header) {
   }
 }
 
-// Mobile menu (Option B : bouton hamburger + dropdown)
+// Mobile menu
 function toggleMobile() {
-  document.getElementById('nav-mobile-menu')?.classList.toggle('open');
-  document.querySelector('.nav-toggle')?.classList.toggle('open');
+  const links = document.querySelector('.nav-links');
+  links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
 }
-
-function closeMobileMenu() {
-  document.getElementById('nav-mobile-menu')?.classList.remove('open');
-  document.querySelector('.nav-toggle')?.classList.remove('open');
-}
-
-// Fermer le menu quand on clique en dehors
-document.addEventListener('click', (e) => {
-  const menu = document.getElementById('nav-mobile-menu');
-  const toggle = document.querySelector('.nav-toggle');
-  if (menu && menu.classList.contains('open') &&
-      !menu.contains(e.target) && !toggle?.contains(e.target)) {
-    closeMobileMenu();
-  }
-});
 
 // ============= RGPD COOKIE BANNER + GA4 =============
 function loadGA4() {
